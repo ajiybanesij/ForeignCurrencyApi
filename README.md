@@ -8,3 +8,5 @@ Banks Currency =>https://foreigncurrencyapi.azurewebsites.net/api/source1/bankcu
 
 Gold List => https://foreigncurrencyapi.azurewebsites.net/api/source1/goldList 
 
+Emtia List => https://foreigncurrencyapi.azurewebsites.net/api/source1/emtiaList
+
