@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace ForeignCurrency.Helper
+{
+    public class Scripts
+    {
+        public string NameControl(string name)
+        {
+            return name
+                .Replace("Ä±", "i")
+                .Replace("Ä°", "İ")
+                .Replace("Ã§", "ç")
+                .Replace("Ã¼", "ü")
+                .Replace("Åž", "Ş")
+                .Replace("Ãœ", "Ü")
+                .Replace("Ã‡", "Ç")
+                .Replace("Dolari", "Doları")
+                .Replace("Randi", "Randı")
+                .Replace("Dinari", "Dinarı")
+                .Replace("Korunasi", "Korunası")
+                .Replace("Yuani", "Yuanı")
+                .Replace("Manati", "Manatı")
+                .Replace("Marki", "Markı")
+                .Replace("Lirasi", "Lirası")
+                .Replace("Kunasi", "Kunası")
+                .Replace("Kronasi", "Kronası")
+                .Replace("Grivnasi", "Grivnası")
+                .Replace("Frangi", "Frangı")
+                .Replace("Hirvat", "Hırvat")
+                .Replace("Sirbistan", "Sırbistan")
+                .Replace("Misir", "Mısır");
+        }
+    }
+}
