@@ -33,5 +33,23 @@ namespace ForeignCurrency.Helper
                 .Replace("Sirbistan", "Sırbistan")
                 .Replace("Misir", "Mısır");
         }
+
+        public List<string> BankNames()
+        {
+            List<string> bankNamesList = new List<string>
+            {
+                "akbank",
+                "denizbank",
+                "qnb-finansbank",
+                "hsbc",
+                "isbankasi",
+                "merkez-bankasi",
+                "sekerbank",
+                "vakifbank",
+                "yapikredi"
+            };
+
+            return bankNamesList.ToList();
+        }
     }
 }

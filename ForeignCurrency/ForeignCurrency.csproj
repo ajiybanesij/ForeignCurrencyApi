@@ -91,6 +91,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Scripts.cs" />
+    <Compile Include="Models\Source1ListModel.cs" />
     <Compile Include="Models\Source1Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
