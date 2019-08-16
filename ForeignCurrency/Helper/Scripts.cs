@@ -10,6 +10,7 @@ namespace ForeignCurrency.Helper
         public string NameControl(string name)
         {
             return name
+                .Replace("ÅŸ", "ş")
                 .Replace("Ä±", "i")
                 .Replace("Ä°", "İ")
                 .Replace("Ã§", "ç")
@@ -31,7 +32,9 @@ namespace ForeignCurrency.Helper
                 .Replace("Frangi", "Frangı")
                 .Replace("Hirvat", "Hırvat")
                 .Replace("Sirbistan", "Sırbistan")
-                .Replace("Misir", "Mısır");
+                .Replace("Misir", "Mısır")
+                .Replace("Altini", "Altını")
+                .Replace("Altin", "Altın");
         }
 
         public List<string> BankNames()
