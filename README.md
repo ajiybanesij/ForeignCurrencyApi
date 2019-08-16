@@ -2,5 +2,6 @@
 Foreign Currency Api
 
 
-https://foreigncurrencyapi.azurewebsites.net/api/source1/currencyList
+Free Market Currency => https://foreigncurrencyapi.azurewebsites.net/api/source1/currencyList  
+Banks Currency =>https://foreigncurrencyapi.azurewebsites.net/api/source1/bankcurrencyList 
 
