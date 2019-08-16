@@ -19,6 +19,8 @@ namespace ForeignCurrency.Helper
                 .Replace("Ãœ", "Ü")
                 .Replace("Ã‡", "Ç")
                 .Replace("â‚º", "₺")
+                .Replace("ÄŸ", "ğ")    
+                .Replace("Ã–", "Ö")    
                 .Replace("Dolari", "Doları")
                 .Replace("Randi", "Randı")
                 .Replace("Dinari", "Dinarı")
@@ -35,7 +37,11 @@ namespace ForeignCurrency.Helper
                 .Replace("Sirbistan", "Sırbistan")
                 .Replace("Misir", "Mısır")
                 .Replace("Altini", "Altını")
-                .Replace("Altin", "Altın");
+                .Replace("Altin", "Altın")
+                .Replace("irlik", "ırlık")
+                .Replace("Bazli", "Bazlı")
+                .Replace("Sinirlamali", "Sınırlamalı")
+                ;
         }
 
         public List<string> BankNames()
