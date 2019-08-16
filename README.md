@@ -12,3 +12,4 @@ Emtia List => https://foreigncurrencyapi.azurewebsites.net/api/source1/emtiaList
 
 Parities List => https://foreigncurrencyapi.azurewebsites.net/api/source1/paritiesList
 
+Cyrpto Money List => https://foreigncurrencyapi.azurewebsites.net/api/source1/cryptomoneyList
