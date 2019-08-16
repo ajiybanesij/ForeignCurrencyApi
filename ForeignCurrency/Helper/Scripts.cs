@@ -18,6 +18,7 @@ namespace ForeignCurrency.Helper
                 .Replace("Åž", "Ş")
                 .Replace("Ãœ", "Ü")
                 .Replace("Ã‡", "Ç")
+                .Replace("â‚º", "₺")
                 .Replace("Dolari", "Doları")
                 .Replace("Randi", "Randı")
                 .Replace("Dinari", "Dinarı")

@@ -268,6 +268,51 @@ namespace ForeignCurrency.Controllers
             return Ok(currencyList);
         }
 
+        [Route("source1/cryptomoneyList")]
+        [HttpGet]
+        public async Task<IHttpActionResult> CryptoMoneyList()
+        {
+            Uri URL = new Uri("https://www.doviz.com/kripto-paralar");
+            List<Source1Model> currencyList = new List<Source1Model>();
+            string html = client.DownloadString(URL);
 
+            HtmlDocument document = new HtmlDocument();
+            document.LoadHtml(html);
+            try
+            {
+                var tableRow = document.DocumentNode.Descendants("tr");
+                int count = 0;
+
+                foreach (var node in tableRow)
+                {
+                    var array = node.InnerText.Replace(" ", "").Trim().Split('\n');
+                    if (count < 1)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        Source1Model model = new Source1Model();
+                        model.Name = _scripts.NameControl(array[0]);    // Currency Name
+                        model.Buyin = array[3];                         // Currency Buyin
+                        model.Sales = _scripts.NameControl(array[4]);   // Currency Sales
+                        model.Change = array[8];                        // Currency Change
+                        model.ChangeUpDown = null;                      //COMING
+                        model.UpdateTime = array[11];                   // Currency Update Time
+
+                        count++;
+                        currencyList.Add(model);
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                return Ok("null");
+            }
+
+            return Ok(currencyList);
+        }
     }
 }
