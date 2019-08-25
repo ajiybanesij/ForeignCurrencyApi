@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using ForeignCurrency.Models.Source1;
 
 namespace ForeignCurrency.Controllers
 {
@@ -17,13 +18,14 @@ namespace ForeignCurrency.Controllers
         private readonly Scripts _scripts = new Scripts();
 
         private WebClient client = new WebClient();
+        
 
         [Route("source1/currencyList")]
         [HttpGet]
         public async Task<IHttpActionResult> CurrencyList()
         {
             Uri URL = new Uri("https://kur.doviz.com/");
-            List<Source1Model> currencyList = new List<Source1Model>();
+            List<Type1Model> currencyList = new List<Type1Model>();
             string html = client.DownloadString(URL);
 
             HtmlDocument document = new HtmlDocument();
@@ -42,13 +44,12 @@ namespace ForeignCurrency.Controllers
                     }
                     else
                     {
-                        Source1Model model = new Source1Model();
-                        model.Name = _scripts.NameControl(array[0]);    // Currency Name
-                        model.Buyin = array[3];                         // Currency Buyin
-                        model.Sales = array[4];                         // Currency Sales
-                        model.Change = array[8];                        // Currency Change
-                        model.ChangeUpDown = null;                      //COMING
-                        model.UpdateTime = array[11];                   // Currency Update Time
+                        Type1Model model = new Type1Model();
+                        model.Name = _scripts.NameControl(array[0]);
+                        model.Buyin = array[3];
+                        model.Sales = array[4];
+                        model.Change = array[8];
+                        model.UpdateTime = array[11];
 
                         count++;
                         currencyList.Add(model);
@@ -62,7 +63,14 @@ namespace ForeignCurrency.Controllers
                 return Ok("null");
             }
 
-            return Ok(currencyList);
+
+            ResultModel<Type1Model> result = new ResultModel<Type1Model>();
+            result._Count = currencyList.Count;
+            result._DateTime = DateTime.Now.ToString();
+            result._Title = "Free Market List";
+            result._Result = currencyList;
+
+            return Ok(result);
         }
 
         [Route("source1/bankcurrencyList")]
@@ -95,13 +103,10 @@ namespace ForeignCurrency.Controllers
                         else
                         {
                             Source1Model model = new Source1Model();
-                            model.Name = _scripts.NameControl(array[0]);    // Currency Name
-                            model.Buyin = array[3];                         // Currency Buyin
-                            model.Sales = array[4];                         // Currency Sales
-                                                                            //model.Change = array[5];                        // Currency Change
-                                                                            //model.ChangeUpDown = null;                      //COMING
-                            model.UpdateTime = array[5];                   // Currency Update Time
-
+                            model.Name = _scripts.NameControl(array[0]);
+                            model.Buyin = array[3];
+                            model.Sales = array[4];
+                            model.UpdateTime = array[5];
                             count++;
                             currencyList.Add(model);
 
@@ -113,6 +118,7 @@ namespace ForeignCurrency.Controllers
                         CurrencyList = currencyList
                     };
                     bankCurrencyList.Add(ListModel);
+
                 }
                 catch (Exception)
                 {
@@ -120,8 +126,14 @@ namespace ForeignCurrency.Controllers
                 }
 
             }
-
-            return Ok(bankCurrencyList);
+            ResultModel<Source1ListModel> model2 = new ResultModel<Source1ListModel>
+            {
+                _Title = "Curency Data",
+                _DateTime = DateTime.Now.ToString(),
+                _Result = bankCurrencyList,
+                _Count = bankCurrencyList.Count
+            };
+            return Ok(model2);
         }
 
         [Route("source1/goldList")]
@@ -202,8 +214,8 @@ namespace ForeignCurrency.Controllers
                         model.Buyin = array[2];                         // Currency Buyin
                         //model.Sales = array[4];                         // Currency Sales
                         model.Change = array[4];                        // Currency Change
-                       // model.ChangeUpDown = null;                      //COMING
-                       // model.UpdateTime = array[11];                   // Currency Update Time
+                                                                        // model.ChangeUpDown = null;                      //COMING
+                                                                        // model.UpdateTime = array[11];                   // Currency Update Time
 
                         count++;
                         currencyList.Add(model);
@@ -346,8 +358,8 @@ namespace ForeignCurrency.Controllers
                         model.Buyin = array[3];                         // Currency Buyin
                         //model.Sales = array[4];                         // Currency Sales
                         model.Change = array[7];                        // Currency Change
-                       // model.ChangeUpDown = null;                      //COMING
-                         model.UpdateTime = array[10];                   // Currency Update Time
+                                                                        // model.ChangeUpDown = null;                      //COMING
+                        model.UpdateTime = array[10];                   // Currency Update Time
 
                         count++;
                         currencyList.Add(model);

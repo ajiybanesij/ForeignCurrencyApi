@@ -93,6 +93,10 @@
     <Compile Include="Helper\Scripts.cs" />
     <Compile Include="Models\Source1ListModel.cs" />
     <Compile Include="Models\Source1Model.cs" />
+    <Compile Include="Models\ResultModel.cs" />
+    <Compile Include="Models\Source1\Type1ListModel.cs" />
+    <Compile Include="Models\Source1\Type1Model.cs" />
+    <Compile Include="Models\Source1\Type2Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

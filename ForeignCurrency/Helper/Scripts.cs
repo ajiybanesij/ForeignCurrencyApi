@@ -47,7 +47,7 @@ namespace ForeignCurrency.Helper
         public List<string> BankNames()
         {
             List<string> bankNamesList = new List<string>
-            {
+            {  
                 "akbank",
                 "denizbank",
                 "qnb-finansbank",
