@@ -351,7 +351,7 @@ namespace ForeignCurrency.Controllers
         public async Task<IHttpActionResult> AllIndex()
         {
             Uri URL = new Uri("https://borsa.doviz.com/endeksler");
-            List<Source1Model> currencyList = new List<Source1Model>();
+            List<Type2Model> currencyList = new List<Type2Model>();
             string html = client.DownloadString(URL);
 
             HtmlDocument document = new HtmlDocument();
@@ -371,13 +371,11 @@ namespace ForeignCurrency.Controllers
                     else
                     {
 
-                        Source1Model model = new Source1Model();
-                        model.Name = _scripts.NameControl(array[0]);    // Currency Name
-                        model.Buyin = array[3];                         // Currency Buyin
-                        //model.Sales = array[4];                         // Currency Sales
-                        model.Change = array[7];                        // Currency Change
-                                                                        // model.ChangeUpDown = null;                      //COMING
-                        model.UpdateTime = array[10];                   // Currency Update Time
+                        Type2Model model = new Type2Model();
+                        model.Name = _scripts.NameControl(array[0]);  
+                        model.Last = array[3];        
+                        model.Change = array[7];                      
+                        model.UpdateTime = array[10];                   
 
                         count++;
                         currencyList.Add(model);
@@ -390,9 +388,15 @@ namespace ForeignCurrency.Controllers
             {
                 return Ok("null");
             }
+            ResultModel<Type2Model> result = new ResultModel<Type2Model>
+            {
+                _Title = "Index List",
+                _DateTime = DateTime.Now.ToString(),
+                _Count=currencyList.Count,
+                _Result=currencyList
+            };
 
-
-            return Ok(currencyList);
+            return Ok(result);
         }
     }
 }
