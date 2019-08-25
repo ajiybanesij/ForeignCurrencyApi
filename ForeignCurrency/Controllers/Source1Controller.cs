@@ -18,7 +18,7 @@ namespace ForeignCurrency.Controllers
         private readonly Scripts _scripts = new Scripts();
 
         private WebClient client = new WebClient();
-        
+
 
         [Route("source1/currencyList")]
         [HttpGet]
@@ -213,9 +213,9 @@ namespace ForeignCurrency.Controllers
                     {
 
                         Type2Model model = new Type2Model();
-                        model.Name = _scripts.NameControl(array[0]); 
-                        model.Last = array[2];    
-                        model.Change = array[4];                         
+                        model.Name = _scripts.NameControl(array[0]);
+                        model.Last = array[2];
+                        model.Change = array[4];
                         count++;
                         currencyList.Add(model);
 
@@ -232,8 +232,8 @@ namespace ForeignCurrency.Controllers
             {
                 _Title = "Emtia List",
                 _DateTime = DateTime.Now.ToString(),
-                _Count=currencyList.Count,
-                _Result=currencyList
+                _Count = currencyList.Count,
+                _Result = currencyList
             };
             return Ok(result);
         }
@@ -243,7 +243,7 @@ namespace ForeignCurrency.Controllers
         public async Task<IHttpActionResult> ParitiesList()
         {
             Uri URL = new Uri("https://www.doviz.com/pariteler");
-            List<Source1Model> currencyList = new List<Source1Model>();
+            List<Type1Model> currencyList = new List<Type1Model>();
             string html = client.DownloadString(URL);
 
             HtmlDocument document = new HtmlDocument();
@@ -262,13 +262,12 @@ namespace ForeignCurrency.Controllers
                     }
                     else
                     {
-                        Source1Model model = new Source1Model();
-                        model.Name = _scripts.NameControl(array[0]);    // Currency Name
-                        model.Buyin = array[3];                         // Currency Buyin
-                        model.Sales = array[4];                         // Currency Sales
-                        model.Change = array[8];                        // Currency Change
-                        model.ChangeUpDown = null;                      //COMING
-                        model.UpdateTime = array[11];                   // Currency Update Time
+                        Type1Model model = new Type1Model();
+                        model.Name = _scripts.NameControl(array[0]);    
+                        model.Buyin = array[3];                         
+                        model.Sales = array[4];                         
+                        model.Change = array[8];    
+                        model.UpdateTime = array[11];                   
 
                         count++;
                         currencyList.Add(model);
@@ -281,8 +280,15 @@ namespace ForeignCurrency.Controllers
             {
                 return Ok("null");
             }
+            ResultModel<Type1Model> result = new ResultModel<Type1Model>
+            {
+                _Title = "Parities List",
+                _DateTime = DateTime.Now.ToString(),
+                _Count=currencyList.Count,
+                _Result=currencyList
+            };
 
-            return Ok(currencyList);
+            return Ok(result);
         }
 
         [Route("source1/cryptomoneyList")]
