@@ -141,7 +141,7 @@ namespace ForeignCurrency.Controllers
         public async Task<IHttpActionResult> GoldList()
         {
             Uri URL = new Uri("https://altin.doviz.com/");
-            List<Source1Model> currencyList = new List<Source1Model>();
+            List<Type1Model> currencyList = new List<Type1Model>();
             string html = client.DownloadString(URL);
 
             HtmlDocument document = new HtmlDocument();
@@ -160,12 +160,11 @@ namespace ForeignCurrency.Controllers
                     }
                     else
                     {
-                        Source1Model model = new Source1Model();
+                        Type1Model model = new Type1Model();
                         model.Name = _scripts.NameControl(array[0]);    // Currency Name
                         model.Buyin = array[3];                         // Currency Buyin
                         model.Sales = array[4];                         // Currency Sales
                         model.Change = array[8];                        // Currency Change
-                        model.ChangeUpDown = null;                      //COMING
                         model.UpdateTime = array[11];                   // Currency Update Time
 
                         count++;
@@ -180,8 +179,12 @@ namespace ForeignCurrency.Controllers
                 return Ok("null");
             }
 
-
-            return Ok(currencyList);
+            ResultModel<Type1Model> result = new ResultModel<Type1Model>();
+            result._Count = currencyList.Count;
+            result._DateTime = DateTime.Now.ToString();
+            result._Title = "Gold Datas";
+            result._Result = currencyList;
+            return Ok(result);
         }
 
         [Route("source1/emtiaList")]
