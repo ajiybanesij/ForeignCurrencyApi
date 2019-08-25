@@ -192,7 +192,7 @@ namespace ForeignCurrency.Controllers
         public async Task<IHttpActionResult> EmtiaList()
         {
             Uri URL = new Uri("https://www.doviz.com/emtialar");
-            List<Source1Model> currencyList = new List<Source1Model>();
+            List<Type2Model> currencyList = new List<Type2Model>();
             string html = client.DownloadString(URL);
 
             HtmlDocument document = new HtmlDocument();
@@ -212,14 +212,10 @@ namespace ForeignCurrency.Controllers
                     else
                     {
 
-                        Source1Model model = new Source1Model();
-                        model.Name = _scripts.NameControl(array[0]);    // Currency Name
-                        model.Buyin = array[2];                         // Currency Buyin
-                        //model.Sales = array[4];                         // Currency Sales
-                        model.Change = array[4];                        // Currency Change
-                                                                        // model.ChangeUpDown = null;                      //COMING
-                                                                        // model.UpdateTime = array[11];                   // Currency Update Time
-
+                        Type2Model model = new Type2Model();
+                        model.Name = _scripts.NameControl(array[0]); 
+                        model.Last = array[2];    
+                        model.Change = array[4];                         
                         count++;
                         currencyList.Add(model);
 
@@ -232,8 +228,14 @@ namespace ForeignCurrency.Controllers
                 return Ok("null");
             }
 
-
-            return Ok(currencyList);
+            ResultModel<Type2Model> result = new ResultModel<Type2Model>
+            {
+                _Title = "Emtia List",
+                _DateTime = DateTime.Now.ToString(),
+                _Count=currencyList.Count,
+                _Result=currencyList
+            };
+            return Ok(result);
         }
 
         [Route("source1/paritiesList")]
