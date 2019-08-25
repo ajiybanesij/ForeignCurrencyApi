@@ -296,7 +296,7 @@ namespace ForeignCurrency.Controllers
         public async Task<IHttpActionResult> CryptoMoneyList()
         {
             Uri URL = new Uri("https://www.doviz.com/kripto-paralar");
-            List<Source1Model> currencyList = new List<Source1Model>();
+            List<Type1Model> currencyList = new List<Type1Model>();
             string html = client.DownloadString(URL);
 
             HtmlDocument document = new HtmlDocument();
@@ -315,13 +315,12 @@ namespace ForeignCurrency.Controllers
                     }
                     else
                     {
-                        Source1Model model = new Source1Model();
-                        model.Name = _scripts.NameControl(array[0]);    // Currency Name
-                        model.Buyin = array[3];                         // Currency Buyin
-                        model.Sales = _scripts.NameControl(array[4]);   // Currency Sales
-                        model.Change = array[8];                        // Currency Change
-                        model.ChangeUpDown = null;                      //COMING
-                        model.UpdateTime = array[11];                   // Currency Update Time
+                        Type1Model model = new Type1Model();
+                        model.Name = _scripts.NameControl(array[0]);    
+                        model.Buyin = array[3];                         
+                       // model.Sales = _scripts.NameControl(array[4]);    TRY
+                        model.Change = array[8];                                            
+                        model.UpdateTime = array[11];                   
 
                         count++;
                         currencyList.Add(model);
@@ -334,8 +333,16 @@ namespace ForeignCurrency.Controllers
             {
                 return Ok("null");
             }
+            ResultModel<Type1Model> result = new ResultModel<Type1Model>
+            {
+                _Title= "Crypto Money List",
+                _DateTime=DateTime.Now.ToString(),
+                _Count=currencyList.Count,
+                _Result=currencyList
+            };
 
-            return Ok(currencyList);
+
+            return Ok(result);
         }
 
 
